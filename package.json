@@ -48,7 +48,7 @@
     "c3": "^0.7.11",
     "chart.js": "^2.8.0",
     "chartist": "^0.11.4",
-    "lodash": "4.17.11",
+    "lodash": "4.17.13",
     "metismenujs": "1.0.3",
     "v-click-outside": "^2.1.4",
     "v-mask": "^2.0.2",
