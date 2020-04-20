@@ -1,6 +1,6 @@
 
 [[redirects]]
-  from = "/api/*"
+  from = "/api"
   to = "https://it-guys.club/"
 
 
