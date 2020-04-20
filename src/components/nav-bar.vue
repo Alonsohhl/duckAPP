@@ -1,5 +1,6 @@
 <script>
 import { authComputed } from '@state/helpers'
+import store from '@state/store'
 
 export default {
   props: {
@@ -16,6 +17,10 @@ export default {
     ...authComputed,
   },
   methods: {
+    navlogOut() {
+      store.dispatch('auth/logOut')
+      this.$router.push({ name: 'login' })
+    },
     toggleMenu() {
       this.$parent.toggleMenu()
     },
@@ -54,7 +59,8 @@ export default {
         </template>
 
         <b-dropdown-divider></b-dropdown-divider>
-        <b-dropdown-item href="/logout">
+        <!-- <b-dropdown-item href="/logout" v-on:click="counter += 1"> -->
+        <b-dropdown-item @click="navlogOut">
           <i class="fe-log-out mr-1"></i>
           <span>Logout</span>
         </b-dropdown-item>

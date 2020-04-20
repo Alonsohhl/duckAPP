@@ -37,6 +37,7 @@ export default [
   {
     path: '/login',
     name: 'login',
+    // component: () => import('../components/content'),
     component: () => lazyLoadView(import('@views/login')),
     meta: {
       beforeResolve(routeTo, routeFrom, next) {
@@ -55,7 +56,8 @@ export default [
   {
     path: '/logout',
     name: 'logout',
-    component: require('@views/_404').default,
+    // component: require('@views/_404').default,
+    component: () => import('../components/content'),
     meta: {
       authRequired: true,
       beforeResolve(routeTo, routeFrom, next) {
