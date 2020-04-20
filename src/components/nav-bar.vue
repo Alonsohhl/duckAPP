@@ -19,7 +19,7 @@ export default {
   methods: {
     navlogOut() {
       store.dispatch('auth/logOut')
-      this.$router.push({ name: 'login' })
+      this.$router.push({ name: 'homeData' })
     },
     toggleMenu() {
       this.$parent.toggleMenu()
@@ -52,15 +52,15 @@ export default {
               class="rounded-circle"
             />
             <span class="pro-user-name ml-1">
-              {{ user ? user.name : 'xxx' }}
+              {{ user ? user.name : '' }}
               <i class="mdi mdi-chevron-down"></i>
             </span>
           </div>
         </template>
 
         <b-dropdown-divider></b-dropdown-divider>
-        <!-- <b-dropdown-item href="/logout" v-on:click="counter += 1"> -->
-        <b-dropdown-item @click="navlogOut">
+        <b-dropdown-item href="/logout">
+          <!-- <b-dropdown-item @click="navlogOut"> -->
           <i class="fe-log-out mr-1"></i>
           <span>Logout</span>
         </b-dropdown-item>
