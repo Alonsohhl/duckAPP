@@ -21,7 +21,6 @@ import '@components/_globals'
 
 import 'animate.css/animate.min.css'
 
-// moment.locale('en-CA')
 Vue.use(VueRouter)
 Vue.use(vco)
 
@@ -42,26 +41,18 @@ Vue.use(KnobControl)
 Vue.use(VueDraggable)
 Vue.use(VueMask)
 Vue.use(require('vue-chartist'))
-
 Vue.component('apexchart', VueApexCharts)
 
 Vue.filter('toMomentJs', function(value) {
   if (!value) return ''
-  if (moment(value).isBefore(moment.now(), 'day'))
-    return moment(value).format('YYYY/MM/DD')
+  if (moment(value).isBefore(moment.now())) return moment(value).fromNow()
 
-  return moment(value)
-    .startOf('hour')
-    .fromNow()
+  return moment(value, 'YYYY/MM/DD ').fromNow()
 })
 
 Vue.filter('toDate', function(value) {
   return moment(value).format('YYYY/MM/DD')
 })
-
-// Uncomment this if you are having api served through other url
-// Vue.prototype.$http = require('axios')
-// Vue.prototype.$http.defaults.baseURL  = 'http://mock-api.coderthemes.com/'
 
 const app = new Vue({
   router,

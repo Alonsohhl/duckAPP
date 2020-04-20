@@ -1,9 +1,7 @@
 <script>
 import { authComputed } from '@state/helpers'
-import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 
 export default {
-  components: { VuePerfectScrollbar },
   props: {
     user: {
       type: Object,
@@ -39,32 +37,21 @@ export default {
       >
         <template slot="button-content">
           <div class="nav-user mr-0">
+            <span class="mr-auto pr-2">
+              <strong>{{ user ? user.user : 'user' }}</strong>
+            </span>
+
             <img
               src="@assets/images/users/user-1.jpg"
               alt="user-image"
               class="rounded-circle"
             />
             <span class="pro-user-name ml-1">
-              {{ user ? user.name : '' }}
+              {{ user ? user.name : 'xxx' }}
               <i class="mdi mdi-chevron-down"></i>
             </span>
           </div>
         </template>
-
-        <b-dropdown-item href="#">
-          <i class="fe-user mr-1"></i>
-          <span>My Account</span>
-        </b-dropdown-item>
-
-        <b-dropdown-item href="#">
-          <i class="fe-settings mr-1"></i>
-          <span>Settings</span>
-        </b-dropdown-item>
-
-        <b-dropdown-item href="#">
-          <i class="fe-lock mr-1"></i>
-          <span>Lock Screen</span>
-        </b-dropdown-item>
 
         <b-dropdown-divider></b-dropdown-divider>
         <b-dropdown-item href="/logout">
@@ -76,13 +63,7 @@ export default {
 
     <!-- LOGO -->
 
-    <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
-      <li>
-        <button class="button-menu-mobile" @click="toggleMenu">
-          <i class="fe-menu"></i>
-        </button>
-      </li>
-
+    <ul class="list-unstyled topnav-menu topnav-menu-left m-0 ml-5">
       <b-nav-item-dropdown class="d-none d-lg-block">
         <template slot="button-content">
           Create
@@ -90,7 +71,7 @@ export default {
         </template>
         <b-dropdown-item href="#">
           <i class="fe-briefcase mr-1"></i>
-          <span>New Projects</span>
+          <span>New Entry</span>
         </b-dropdown-item>
         <b-dropdown-item href="#">
           <i class="fe-user mr-1"></i>
