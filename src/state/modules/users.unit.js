@@ -33,7 +33,7 @@ describe('@state/modules/users', () => {
       return store
         .dispatch('fetchUser', { username: 'bad-username' })
         .catch((error) => {
-          expect(error.response.status).toEqual(400)
+          expect(error.response.status).toEqual(401)
         })
     })
   })

@@ -57,7 +57,7 @@ export default [
     path: '/logout',
     name: 'logout',
     // component: require('@views/_404').default,
-    component: () => import('../components/logOut'),
+    // component: () => import('../components/logOut'),
     meta: {
       authRequired: true,
       beforeResolve(routeTo, routeFrom, next) {
@@ -69,9 +69,7 @@ export default [
         // Navigate back to previous page, or home as a fallback
         // next({ name: 'login' })
         // next({ name: 'homeData' })
-        next(
-          authRequiredOnPreviousRoute ? { name: 'homeData' } : { ...routeFrom }
-        )
+        next(authRequiredOnPreviousRoute ? { name: 'home' } : { ...routeFrom })
       },
     },
   },

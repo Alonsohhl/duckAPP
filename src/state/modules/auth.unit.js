@@ -1,4 +1,4 @@
-import axios from 'axios'
+// import axios from 'axios'
 import * as authModule from './auth'
 
 describe('@state/modules/auth', () => {
@@ -11,16 +11,6 @@ describe('@state/modules/auth', () => {
     beforeEach(() => {
       store = createModuleStore(authModule)
       window.localStorage.clear()
-    })
-
-    it('mutations.SET_CURRENT_USER correctly sets axios default authorization header', () => {
-      axios.defaults.headers.common.Authorization = ''
-
-      store.commit('SET_CURRENT_USER', { token: 'some-token' })
-      expect(axios.defaults.headers.common.Authorization).toEqual('some-token')
-
-      store.commit('SET_CURRENT_USER', null)
-      expect(axios.defaults.headers.common.Authorization).toEqual('')
     })
 
     it('mutations.SET_CURRENT_USER correctly saves currentUser in localStorage', () => {
@@ -100,23 +90,13 @@ describe('@state/modules/auth', () => {
         expect(store.state.currentUser).toEqual(null)
       })
     })
-
-    it('actions.validate resolves to a user when currentUser contains a valid token', () => {
-      expect.assertions(2)
-
-      store.commit('SET_CURRENT_USER', { token: validUserExample.token })
-      return store.dispatch('validate').then((user) => {
-        expect(user).toEqual(validUserExample)
-        expect(store.state.currentUser).toEqual(validUserExample)
-      })
-    })
   })
 })
 
 const validUserExample = {
   id: 1,
-  username: 'admin',
-  name: 'Nik Patel',
+  username: 'Alonso',
+  name: 'fresh',
   token: 'valid-token-for-admin',
-  email: 'support@coderthemes.com'
+  email: 'alonso.hl25@gmail.com',
 }
