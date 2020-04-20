@@ -55,10 +55,12 @@ export default [
   {
     path: '/logout',
     name: 'logout',
+    component: require('@views/_404').default,
     meta: {
       authRequired: true,
       beforeResolve(routeTo, routeFrom, next) {
         store.dispatch('auth/logOut')
+
         // const authRequiredOnPreviousRoute = routeFrom.matched.some(
         //   (route) => route.meta.authRequired
         // )
