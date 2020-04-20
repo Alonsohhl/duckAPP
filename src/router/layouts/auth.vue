@@ -16,8 +16,8 @@ export default {
       </div>
     </div>
     <footer class="footer footer-alt">
-      2016 - 2019 © Ubold theme by
-      <a href class="text-muted">Coderthemes</a>
+      FreshWorks Studio App Testing
+      <a href class="text-muted">Alonso Huayta</a>
     </footer>
   </div>
 </template>

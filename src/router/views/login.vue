@@ -51,7 +51,7 @@ export default {
         })
         .catch((error) => {
           this.tryingToLogIn = false
-          this.authError = error.response? error.response.data.message: ''
+          this.authError = error.response ? error.response.data.message : ''
           this.isAuthError = true
         })
     },
@@ -66,18 +66,15 @@ export default {
         <div class="card bg-pattern">
           <div class="card-body p-4">
             <div class="text-center w-75 m-auto">
-              <a href="/">
-                <span
-                  ><img src="@assets/images/logo-dark.png" alt="" height="22"
-                /></span>
-              </a>
+              <a href="/"> </a>
               <p class="text-muted mb-4 mt-3"
-                >Enter your email address and password to access admin panel.</p
+                >Enter user and password for testing ( user:fresh
+                password:fresh).</p
               >
             </div>
 
             <b-alert v-model="isAuthError" variant="danger" dismissible>
-              {{authError}}
+              {{ authError }}
             </b-alert>
 
             <b-form @submit.prevent="tryToLogIn">
@@ -120,20 +117,6 @@ export default {
         </div>
         <!-- end card -->
 
-        <div class="row mt-3">
-          <div class="col-12 text-center">
-            <p>
-              <router-link tag="a" to="/forget-password" class="text-white-50 ml-1">Forgot your password?</router-link>
-              </p
-            >
-            <p class="text-white-50"
-              >Don't have an account?
-              <router-link tag="a" to="/register" class="text-white ml-1"><b>Sign Up</b></router-link>
-              </p
-            >
-          </div>
-          <!-- end col -->
-        </div>
         <!-- end row -->
       </div>
       <!-- end col -->
