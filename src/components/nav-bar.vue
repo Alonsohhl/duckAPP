@@ -73,22 +73,6 @@ export default {
           <i class="fe-briefcase mr-1"></i>
           <span>New Entry</span>
         </b-dropdown-item>
-        <b-dropdown-item href="#">
-          <i class="fe-user mr-1"></i>
-          <span>Create Users</span>
-        </b-dropdown-item>
-        <b-dropdown-item href="#">
-          <i class="fe-bar-chart-line- mr-1"></i>
-          <span>Revenue Report</span>
-        </b-dropdown-item>
-        <b-dropdown-item href="#">
-          <i class="fe-settings mr-1"></i>
-          <span>Settings</span>
-        </b-dropdown-item>
-        <b-dropdown-item href="#">
-          <i class="fe-headphones mr-1"></i>
-          <span>Help & Support</span>
-        </b-dropdown-item>
       </b-nav-item-dropdown>
     </ul>
   </div>
