@@ -3,7 +3,7 @@ import store from '@state/store'
 export default [
   {
     path: '/',
-    name: 'home',
+    // name: 'home',
     component: () => lazyLoadView(import('@views/home')),
     meta: {
       authRequired: true,

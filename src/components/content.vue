@@ -3,19 +3,26 @@
     <div class="row">
       <router-link
         tag="a"
-        class="btn btn-danger waves-effect waves-light mb-2"
+        class="btn btn-danger waves-effect waves-light mb-2 d-print-none"
         :to="{ name: 'dataFedInsert' }"
         data-animation="fadein"
         data-plugin="custommodal"
         data-overlaycolor="#38414a"
         >Add data entry</router-link
       >
+      <div class="ml-1 text-right d-print-none">
+        <a
+          href="javascript:window.print()"
+          class="btn btn-primary waves-effect waves-light"
+          ><i class="mdi mdi-printer mr-1"></i> Print</a
+        >
+      </div>
     </div>
 
     <div class="row">
       <div class="col-xl-6">
         <div class="card-box">
-          <h4 class="header-title mb-3">Last 5 food entries</h4>
+          <h4 class="header-title mb-3">Entries</h4>
 
           <div class="table-responsive mb-0">
             <b-table
@@ -73,6 +80,8 @@ import {
   // revenueData,
 } from './data'
 
+import _ from 'lodash'
+
 export default {
   data() {
     return {
@@ -108,8 +117,8 @@ export default {
           // },
           // {
           //   name: 'Marketplaces',
-          //   type: 'line',
-          //   data: [1, 2, 3, 4, 5, 6, 7, 8, 3, 1],
+          //   type: 'area',
+          //   data: [1, 2, 3, 4, 5, 6],
           // },
         ],
       },
@@ -147,18 +156,7 @@ export default {
             stops: [0, 100, 100, 100],
           },
         },
-        // labels: [
-        //   '01/01/2003',
-        //   '02/01/2003',
-        //   '03/01/2003',
-        //   '04/01/2003',
-        //   '05/01/2003',
-        //   '06/01/2003',
-        //   '07/01/2003',
-        //   '08/01/2003',
-        //   '09/01/2003',
-        //   '10/01/2003',
-        // ],
+        labels: [],
         markers: {
           size: 0,
         },
@@ -166,7 +164,7 @@ export default {
           show: false,
         },
         xaxis: {
-          // type: 'datetime',
+          // type: 'text',
           categories: [],
           axisBorder: {
             show: false,
@@ -199,48 +197,69 @@ export default {
     }
   },
 
+  beforeCreate: function() {
+    // this.fillTable()
+  },
   created: function() {
     this.fillTable()
-
-    // this.chartOptions.labels = [
-    //   moment()
-    //     .subtract(10, 'days')
-    //     .calendar(),
-    //   moment()
-    //     .subtract(9, 'days')
-    //     .calendar(),
-    //   moment()
-    //     .subtract(8, 'days')
-    //     .calendar(),
-    //   moment()
-    //     .subtract(7, 'days')
-    //     .calendar(),
-    // ]
+  },
+  mounted: function() {
+    // this.fillTable()
   },
   methods: {
     fillTable: function(value) {
       this.tableBusy = true
-      //   let axiosQuery = `${API_URL}ventas/fetchAll`
-      //   if (value & (this.table.filter.selectedOption === 'id')) axiosQuery += `?id=${value}`
-      //   if (value & (this.table.filter.selectedOption === 'Num_Boleta')) axiosQuery += `?Num_Boleta=${value}`
 
-      axios
+      return axios
         .get('api/feds/fetch')
         .then((response) => {
           this.tableItems = response.data
           this.tableBusy = false
-          this.tableItems.forEach((key, index) => {
-            console.log(index)
-            if (index < 10) {
-              this.chart.series[0].data.unshift(key.quantityDucks)
-              this.chartOptions.xaxis.categories.unshift(
-                moment(key.time).format('Do , h:mm')
-                // moment().format(key.time)
-              )
-            }
-          })
 
-          console.log(this.chartOptions.labels)
+          this.chartData = _.chain(response.data)
+            .groupBy((datum) => moment(datum.time).format('MMM DD YYYY'))
+            .map((objs, key) => ({
+              day: key,
+              dailyFood: _.sumBy(objs, 'quantityFood'),
+              ducksFeed: _.sumBy(objs, 'quantityDucks'),
+            }))
+            .sortBy('day')
+            .value()
+        })
+        .then(() => {
+          console.log(this.chartData)
+
+          this.chartOptions = {
+            xaxis: {
+              categories: _.chain(this.chartData)
+                .map('day')
+                .value(),
+            },
+          }
+          // this.chart.series[0].data = _.chain(this.chartData)
+          //   .map('ducksFeed')
+          //   .value()
+
+          this.chart = {
+            series: [
+              {
+                name: 'Ducks Feed',
+                type: 'column',
+                data: _.chain(this.chartData)
+                  .map('ducksFeed')
+                  .value(),
+              },
+              {
+                name: 'Food',
+                type: 'area',
+                data: _.chain(this.chartData)
+                  .map('dailyFood')
+                  .value(),
+              },
+            ],
+          }
+
+          console.log(this.chart.series[1].data)
         })
 
         .catch(function(error) {
