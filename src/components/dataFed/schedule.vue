@@ -103,11 +103,12 @@ import Swal from 'sweetalert2'
 // import moment from 'moment'
 // import integer from 'vuelidate/lib/validators/integer'
 import axios from 'axios'
+// import integer from 'vuelidate/lib/validators/integer'
 
 export default {
   components: { DatePicker },
   props: {
-    id: String,
+    id: Number,
   },
   data() {
     return {
@@ -152,6 +153,13 @@ export default {
   methods: {
     onSubmit: function(e) {
       e.preventDefault()
+      console.log({
+        data: {
+          id_fed: this.id,
+          endDate: this.endDate,
+          frequencyType: this.selected,
+        },
+      })
       axios
         .post('/api/schedules/insert', {
           data: {

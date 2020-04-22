@@ -217,9 +217,11 @@ export default {
                   //   'Your file has been deleted.',
                   //   'success'
                   // )
+                  console.log('++++++')
+                  console.log(response)
                   this.$router.push({
                     name: 'scheduleInsert',
-                    params: { id: '23' },
+                    params: { id: response.data.id },
                   })
                 } else if (result.dismiss === Swal.DismissReason.cancel) {
                   this.$router.push({ name: 'homeData' })
