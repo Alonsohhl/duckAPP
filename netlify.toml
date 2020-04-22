@@ -5,4 +5,7 @@
   status = 200
   force = true
 
-
+[[redirects]]
+  from = "/*"
+  to = "/404"
+  status = 404

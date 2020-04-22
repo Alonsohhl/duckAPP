@@ -22,6 +22,12 @@ export default [
         component: () => import('../components/dataFed/insert'),
         // default: true,
       },
+      {
+        name: 'scheduleInsert',
+        path: '/schedule/:id',
+        component: () => lazyLoadView(import('@views/Feds/scheduleView')),
+        // default: true,
+      },
       // {
       //   name: 'mainProd',
       //   path: 'mainProd',
