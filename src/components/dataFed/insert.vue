@@ -212,13 +212,6 @@ export default {
               })
               .then((result) => {
                 if (result.value) {
-                  // swalWithBootstrapButtons.fire(
-                  //   'Deleted!',
-                  //   'Your file has been deleted.',
-                  //   'success'
-                  // )
-                  console.log('++++++')
-                  console.log(response)
                   this.$router.push({
                     name: 'scheduleInsert',
                     params: { id: response.data.id },
