@@ -65,13 +65,6 @@
 <script>
 import axios from 'axios'
 import moment from 'moment'
-// import {
-//   widgetData,
-//   revenueRadialChart,
-//   salesMixedChart,
-//   userBalanceData,
-//   revenueData,
-// } from '../router/views/data'
 import {
   // widgetData,
   revenueRadialChart,
@@ -184,7 +177,7 @@ export default {
           y: {
             formatter(y) {
               if (typeof y !== 'undefined') {
-                return y.toFixed(0) + ' feds'
+                return y.toFixed(0) + ' entries'
               }
               return y
             },
@@ -227,8 +220,6 @@ export default {
             .value()
         })
         .then(() => {
-          console.log(this.chartData)
-
           this.chartOptions = {
             xaxis: {
               categories: _.chain(this.chartData)
@@ -249,6 +240,11 @@ export default {
                   .map('ducksFeed')
                   .value(),
               },
+              // {
+              //   name: 'Extra',
+              //   type: 'area',
+              //   data: [44, 55, 41, 67, 22, 43],
+              // },
               {
                 name: 'Food',
                 type: 'area',
@@ -258,8 +254,6 @@ export default {
               },
             ],
           }
-
-          console.log(this.chart.series[1].data)
         })
 
         .catch(function(error) {

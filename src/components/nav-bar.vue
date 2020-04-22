@@ -75,7 +75,7 @@ export default {
           Create
           <i class="mdi mdi-chevron-down"></i>
         </template>
-        <b-dropdown-item href="#">
+        <b-dropdown-item href="/insert">
           <i class="fe-briefcase mr-1"></i>
           <span>New Entry</span>
         </b-dropdown-item>

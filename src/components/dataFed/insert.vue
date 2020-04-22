@@ -101,7 +101,7 @@
             <div class="form-row mb-2">
               <div class="col-2">
                 <label for="product-name">
-                  Park:
+                  Food:
                 </label>
                 <b-form-select
                   v-model="$v.fed.id_food.$model"
@@ -138,6 +138,13 @@ import DatePicker from 'vue2-datepicker'
 import axios from 'axios'
 import { required, minValue } from 'vuelidate/lib/validators'
 import Swal from 'sweetalert2'
+const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: 'btn btn-success',
+    cancelButton: 'btn btn-danger',
+  },
+  buttonsStyling: false,
+})
 
 export default {
   components: { DatePicker },
@@ -192,20 +199,38 @@ export default {
           })
           .then((response) => {
             this.submitStatus = 'SUBMITED'
-            Swal.fire({
-              title: 'success!',
-              text: 'record entered correctly',
-              confirmButtonText: 'continue',
-            })
-            this.$router.push({ name: 'homeData' })
+
+            swalWithBootstrapButtons
+              .fire({
+                title: 'record entered correctly!',
+                text: 'Do you want to schedule this entry?',
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, schedule it',
+                cancelButtonText: 'Not for now',
+                reverseButtons: true,
+              })
+              .then((result) => {
+                if (result.value) {
+                  // swalWithBootstrapButtons.fire(
+                  //   'Deleted!',
+                  //   'Your file has been deleted.',
+                  //   'success'
+                  // )
+                  this.$router.push({
+                    name: 'scheduleInsert',
+                    params: { id: '23' },
+                  })
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                  this.$router.push({ name: 'homeData' })
+                }
+              })
           })
           .catch((err) => {
             if (err.response && err.response.data) {
-              // console.log(err.response.data)
+              console.log(err.response.data)
             }
             this.submitStatus = 'ERROR'
-            // console.log('error x')
-            // console.log({ err })
           })
       }
     },
